@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Personalised DataBOT</title>
+
+    <style>
+        .box {
+            height:240px;
+            width:80%;
+            /* border:1px solid #ccc; */
+            font:16px/26px Georgia, Garamond, Serif;
+            overflow:auto;
+            background-color: lightgrey;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border: 15px solid rgb(7, 138, 131);
+            padding: 50px;
+            margin: 20px;
+            border-radius: 12px;
+
+        }
+
+        .box1 {
+            height: 120px;
+            width:80%;
+            /* border:1px solid #ccc; */
+            font:16px/26px Georgia, Garamond, Serif;
+            overflow:auto;
+            background-color: lightgrey;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            border: 15px solid rgb(7, 138, 131);
+            padding: 50px;
+            margin: 20px;
+            border-radius: 12px;
+
+        }
+
+        body {
+            /* background-image: url("D:\Django Projects\pdftry\pdfapp\templates\pdfapp\white3.jpg") ; */
+            /* background-image: url('https://www.google.com/imgres?q=images&imgurl=https%3A%2F%2Fimg.freepik.com%2Ffree-photo%2Fpainting-mountain-lake-with-mountain-background_188544-9126.jpg&imgrefurl=https%3A%2F%2Fwww.freepik.com%2Ffree-photos-vectors%2Fbackground&docid=bKJ3gdlWTtaNoM&tbnid=ASMDFNsL7Vw1YM&vet=12ahUKEwjy4u_t39GFAxWV1TgGHaR7CQUQM3oECBQQAA..i&w=626&h=358&hcb=2&itg=1&ved=2ahUKEwjy4u_t39GFAxWV1TgGHaR7CQUQM3oECBQQAA') ; */
+            /* background: url('D:\Django Projects\pdftry\pdfapp\templates\pdfapp\white3.jpg'); */
+            background-color: #FFC470;
+            /* background-color: #000000; */
+
+        }
+/* 
+        body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        overflow: hidden; /* Hide scroll bars */
+    /* }  */
+    #video-bg {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Place video behind other content */
+        object-fit: cover; /* Cover entire viewport */
+    }
+
+        .button {
+                background-color: #8B322C;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+               cursor: pointer;
+               border-radius: 12px;
+             
+}
+
+.button1 {
+                background-color: #DD5746;
+                border: none;
+                color: white;
+                padding: 15px 32px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+               cursor: pointer;
+               border-radius: 20px;
+               
+}
+
+input[type=text] {
+  width: 230px;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: rgba(237, 236, 236, 0.951);
+  background-image: url('searchicon.png');
+  background-position: 10px 10px; 
+  background-repeat: no-repeat;
+  padding: 12px 20px 12px 40px;
+  transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+  width: 50%;
+}
+
+
+        </style>
+</head>
+<!-- <body bgcolor="CYAN"> -->
+    <br><br>
+<body >
+
+    <!-- <video id="video-bg" autoplay muted loop>
+        <source src="pdfapp/static/videos/video.mp4" type="video/mp4">
+      
+        Your browser does not support the video tag.
+    </video> -->
+    <center>
+
+   <i> <h1 style="font:30px/40px Georgia, Garamond, Serif;">Your Personal BOT Asks For a PDF File Please...</h1></i>
+    <form  action="{% url 'list' %}" method="post" enctype="multipart/form-data" id="form1">
+        {% csrf_token %}
+        <p class="button1">
+            {{ form.file }}  <!--choose file-->
+            
+        </p>
+        
+
+        <input class="button"  type="submit" value="UPLOAD"> <!--Upload-->
+    </form>
+</center>  
+<br>
+
+<center>
+<div class="box">
+
+   <i> <font color="grey"><h2>PDF Content</h2></font></i>
+    <pre >{{ content }}</pre>
+</div>
+</center>
+<br>
+
+<div>
+<!-- <input type="'text" placeholder="Ask your question"> -->
+<!-- <input type="text" form="form1" placeholder="Ask your question"> -->
+
+
+<!-- <form  action="{% url 'ques' %}" method="post">
+    {% csrf_token %}
+
+    <input type="text" name="num1" placeholder="Enter your question" required>
+    
+
+    <input type="submit" value="Ask"> 
+</form> -->
+<center>
+<form  action="{% url 'ques' %}" method="post">
+
+    {% csrf_token %}
+
+    <input class="inbox" type="text" name="num1" placeholder="Enter your question" required>
+    <input type="hidden" name="contentv" value="{{ content }}">
+
+    <button class="button"  type="submit">ASK</button>
+    
+
+    
+</form>
+</center>
+
+
+
+
+
+</div>
+<br><br>
+<center>
+<div class="box1">
+
+    <font color="grey"><i><h2>Your Result:</h2></i></font>
+    <pre>{{ result }}</pre>
+</div>
+
+<!-- <div>
+
+    <iframe src="pdf_context.html" height="200" width="300" title="Iframe Example"></iframe>
+
+</div> -->
+</center>
+
+</body>
+</html>
